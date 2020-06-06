@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 style="position: relative; left:450 px">Posts</h1>
+
+<ul>
+<div>
+{% for post in object_list %}
+    <li>
+        <a href="{% url 'article-detail' post.pk %}">{{ post.title.capitalize }}</a>
+        <small>
+        <a href="{% url 'category' post.category %}" class="badge badge-primary">{{ post.category }}</a> -
+        {{ post.author.first_name }}
+        {{ post.author.last_name }} -
+        {{ post.post_date }}
+        </small><br/>
+        {{ post.text|slice:":200"|safe }}...
+    </li>
+
+
+{% endfor%}
+</div>
+</ul>
+
+{% endblock %}

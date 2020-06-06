@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if category_posts %}
+
+<h1>{{ cats }}</h1>
+
+{% for post in category_posts %}
+    <li>
+        <a href="{% url 'article-detail' post.pk %}">{{ post.title.capitalize }}</a> -
+        <small>
+        {{ post.author.first_name }}
+        {{ post.author.last_name }} -
+        {{ post.post_date }}
+        </small><br/>
+        {{ post.text|slice:":200"|safe }}...
+    </li>
+{% endfor%}
+
+{% else %}
+<h1><font color="grey">{{ cats }}</font> category doesn't exist</h1>
+
+{% endif %}
+
+<a href="{% url 'home' %}" class="btn btn-secondary ">Back</a>
+
+{% endblock %}

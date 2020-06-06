@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}New block post{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<h1>Add Post...</h1>
+<br/><br/>
+<div class="form-group">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-secondary">Post</button>
+</div>
+
+    <script>
+        var name = "{{ user.id }}";
+        document.getElementById("user").value = name;
+    </script>
+
+{% else %}
+    <h1>You're not Login</h1>
+    <a href="{% url 'login'%}" class="btn btn-secondary">Login</a>
+    <a href="{% url 'register'%}" class="btn btn-secondary">Register</a>
+{% endif %}
+
+
+
+
+{% endblock %}
